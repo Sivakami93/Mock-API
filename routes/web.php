@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +15,13 @@ use App\Http\Controllers\UserController;
 Route::get('/web', function () {
     return view('api');
 });
-Route::get('/', [TaskController::class, 'index']);
-Route::post('/add', [TaskController::class, 'store']);
-Route::delete('/delete/{id}', [TaskController::class, 'destroy']);
-// for mock api
+
 Route::post('/submit', [UserController::class, 'store']);
 Route::get('/show/{id}',[UserController::class, 'show']);
+
+Route::get('/json-test', function () {
+    return response()->json([
+        'name' => 'Jone',
+        'updated' => true,
+    ]);
+});

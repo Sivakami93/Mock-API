@@ -10,7 +10,6 @@ class UserController extends Controller
 {
   
 public function store(Request $request)
-
 {
     $uuid = Str::uuid();
     
@@ -21,12 +20,16 @@ public function store(Request $request)
         'uuid'=> $uuid,
         'json' => $request["json"]
     ]);
-    return redirect()->back()->with('message',"Json stored successfully. You can view it at http://localhost:8000/show/$uuid");
-}
+return redirect('/web')->with(
+    'message',
+    'Json stored successfully. You can view it at <a href="' . url('/show/' . $uuid) . '" target="_blank">' . url('/show/' . $uuid) . '</a>'
+);}
+
+ 
 
 public function show($uuid)
  {
     $users = User::findOrFail($uuid);
-    return $users->json;
+    return response()->json($users, 200, [], JSON_PRETTY_PRINT);
  }
 }

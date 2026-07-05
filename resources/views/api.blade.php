@@ -10,11 +10,7 @@
     <!-- Add Task Form -->
     
     <hr>
-    @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-    @endif
+    
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -24,11 +20,12 @@
         </ul>
     </div>
     @endif
+    
     <form action="/submit" method="POST">
         @csrf
         <textarea name="json" placeholder="Enter json"></textarea>
        
-        <button type="submit">Add</button>
+        <button type="submit"><br><br><br>Add</button> <br><br> {!! session('message') !!}
     </form>
 
     <!-- Display Tasks -->
